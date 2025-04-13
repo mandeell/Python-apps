@@ -17,6 +17,15 @@ def division(num1, num2):
         return num1 / num2
 
 
+def operation(op):
+    operations = {
+        '1': 'addition',
+        '2': 'subtraction',
+        '3': 'multiplication',
+        '4': 'division'
+    }
+    return operations.get(op, 'invalid operation')
+
 # Basic Calculator
 print('Welcome to this Basic Calculator')
 
@@ -27,8 +36,19 @@ while True:
     print('2. Subtraction')
     print('3. Multiplication')
     print('4. Division')
-    operation = input(
+
+
+    op = input(
         '\nEnter the number of the operation you want to perform: ')
+
+    selected_op = operation(op)
+    print(f'\nYou have selected a {selected_op}')
+
+    if selected_op == 'invalid operation':
+        print('Invalid operation. Please try again.')
+        continue
+
+
     num1 = float(input('\nEnter first number: '))
     num2 = float(input('Enter second number: '))
     if operation == '1':
