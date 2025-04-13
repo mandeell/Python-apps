@@ -1,45 +1,20 @@
-# import time
-# from tokenize import String
-
-
-# def countdown_timer(seconds):
-#     while seconds:
-#         mins, secs = divmod(seconds, 60)
-#         timer = f'{mins:02}:{secs:02}'
-#         print(timer, end='\r')
-#         time.sleep(1)
-#         seconds -= 1
-
-#     print("Time's up!")
-
-
-# if __name__ == "__main__":
-#     try:
-#         total_seconds = int(input("Enter the countdown time in seconds: "))
-#         countdown_timer(total_seconds)
-#     except ValueError:
-#         print("Please enter a valid number.")
-
-# num1 = float(input('Enter first number: '))
-# num2 = float(input('Enter second number: '))
-
 def addition(num1, num2):
-    return (num1 + num2)
+    return num1 + num2
 
 
 def subtraction(num1, num2):
-    return (num1 - num2)
+    return num1 - num2
 
 
 def multiplication(num1, num2):
-    return (num1 * num2)
+    return num1 * num2
 
 
 def division(num1, num2):
     if num2 == 0:
         return "Error! Division by zero."
     else:
-        return (num1 / num2)
+        return num1 / num2
 
 
 # Basic Calculator
