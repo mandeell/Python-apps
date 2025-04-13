@@ -24,7 +24,7 @@ def operation(op):
         '3': 'multiplication',
         '4': 'division'
     }
-    return operations.get(op, 'invalid operation')
+    return operations.get(op, 'invalid')
 
 # Basic Calculator
 print('Welcome to this Basic Calculator')
@@ -42,22 +42,22 @@ while True:
         '\nEnter the number of the operation you want to perform: ')
 
     selected_op = operation(op)
-    print(f'\nYou have selected a {selected_op}')
+    print(f'\nYou have selected an {selected_op} operation')
 
-    if selected_op == 'invalid operation':
-        print('Invalid operation. Please try again.')
+    if selected_op == 'invalid':
+        print('Please try again.')
         continue
 
 
     num1 = float(input('\nEnter first number: '))
     num2 = float(input('Enter second number: '))
-    if operation == '1':
+    if op == '1':
         print(addition(num1, num2))
-    elif operation == '2':
+    elif op == '2':
         print(subtraction(num1, num2))
-    elif operation == '3':
+    elif op == '3':
         print(multiplication(num1, num2))
-    elif operation == '4':
+    elif op == '4':
         print(division(num1, num2))
     else:
         print('Invalid operation. Please try again.')
