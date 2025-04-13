@@ -1,30 +1,30 @@
-def addition(num1, num2):
-    return num1 + num2
+def addition(anum1, anum2):
+    return anum1 + anum2
 
 
-def subtraction(num1, num2):
-    return num1 - num2
+def subtraction(bnum1, bnum2):
+    return bnum1 - bnum2
 
 
-def multiplication(num1, num2):
-    return num1 * num2
+def multiplication(cnum1, cnum2):
+    return cnum1 * cnum2
 
 
-def division(num1, num2):
+def division(fnum1, fnum2):
     if num2 == 0:
         return "Error! Division by zero."
     else:
-        return num1 / num2
+        return fnum1 / fnum2
 
 
-def operation(op):
+def operation(ope):
     operations = {
         '1': 'addition',
         '2': 'subtraction',
         '3': 'multiplication',
         '4': 'division'
     }
-    return operations.get(op, 'invalid')
+    return operations.get(ope, 'invalid')
 
 # Basic Calculator
 print('Welcome to this Basic Calculator')
