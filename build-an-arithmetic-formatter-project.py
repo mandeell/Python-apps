@@ -1,10 +1,9 @@
 def arithmetic_arranger(problems, show_answers=False):
-
-# Check if there are too many problems
+    # Check if there are too many problems
     if len(problems) > 5:
         return "Error: Too many problems."
 
-# Initialize lists to store formatted lines
+    # Initialize lists to store formatted lines
     top_line = []
     bottom_line = []
     dash_line = []
@@ -15,17 +14,17 @@ def arithmetic_arranger(problems, show_answers=False):
         parts = problem.split()
         if len(parts) != 3:
             return "Error: Invalid problem format."
-        
+
         num1, operator, num2 = parts
 
-    # Validate operator
+        # Validate operator
         if operator not in ['+', '-']:
             return "Error: Operator must be '+' or '-'."
-        
+
         # Validate numbers (only digits)
         if not (num1.isdigit() and num2.isdigit()):
             return "Error: Numbers must only contain digits."
-        
+
         # Validate number length (max 4 digits)
         if len(num1) > 4 or len(num2) > 4:
             return "Error: Numbers cannot be more than four digits."
@@ -50,11 +49,12 @@ def arithmetic_arranger(problems, show_answers=False):
         if show_answers:
             answer_line.append(str(answer).rjust(max_width))
 
-    # Join lines with four spaces between problems
-    formatted = []
-    formatted.append('    '.join(top_line))
-    formatted.append('    '.join(bottom_line))
-    formatted.append('    '.join(dash_line))
+    # Use list literal to assemble lines
+    formatted = [
+        '    '.join(top_line),
+        '    '.join(bottom_line),
+        '    '.join(dash_line)
+    ]
     if show_answers:
         formatted.append('    '.join(answer_line))
 
@@ -62,4 +62,6 @@ def arithmetic_arranger(problems, show_answers=False):
     return '\n'.join(formatted)
 
 
-print(f'\n{arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"])}')
+print(arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"], True))
+#print('\n')
+#print(arithmetic_arranger(["32 + 8", "1 - 3801", "9999 + 9999", "523 - 49"], True))
