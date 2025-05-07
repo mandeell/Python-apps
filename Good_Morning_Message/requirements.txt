@@ -1,0 +1,6 @@
+twilio
+openai
+schedule
+flask
+python-dotenv
+gunicorn

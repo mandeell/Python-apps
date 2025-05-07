@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Good Morning Message Config</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+        label { display: block; margin-top: 10px; }
+        input, textarea { width: 100%; padding: 5px; }
+        button { margin-top: 20px; padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <h1>Configure Good Morning Message</h1>
+    <form method="POST" action="/config">
+        <label>Time (HH:MM):</label>
+        <input type="text" name="time" value="{{ config.time }}">
+        <label>Message Prompt:</label>
+        <textarea name="prompt">{{ config.prompt }}</textarea>
+        <label>Sender Number:</label>
+        <input type="text" name="sender_number" value="{{ config.sender_number }}">
+        <label>Receiver Number:</label>
+        <input type="text" name="receiver_number" value="{{ config.receiver_number }}">
+        <label>Message Generator:</label>
+        <input type="radio" name="use_grok" value="true" {% if config.use_grok %}checked{% endif %}> Grok
+        <input type="radio" name="use_grok" value="false" {% if not config.use_grok %}checked{% endif %}> OpenAI
+        <button type="submit">Save</button>
+    </form>
+    <form method="POST" action="/send_now">
+        <button type="submit">Send Now</button>
+    </form>
+</body>
+</html>
