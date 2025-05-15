@@ -22,7 +22,7 @@ shadow.goto(-200, 150)  # Start position (top-left of table)
 table_lines = my_table.get_string().split('\n')
 for line in table_lines:
     shadow.write(line, align="left", font=("Courier", 10, "normal"))
-    shadow.sety(shadow.ycor() - 20)  # Move down for next line
+    shadow.sety(shadow.ycor() - 20)  # Move down the next line
 
 # Turtle movements
 shadow.pendown()
