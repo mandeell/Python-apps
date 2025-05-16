@@ -52,18 +52,18 @@ timmy = t.Turtle()
 my_screen = t.Screen()
 t.colormode(255)
 # my_screen.bgcolor("beige")
-timmy.pensize(2)
+timmy.pensize(15)
 timmy.shape("turtle")
 timmy.shapesize(1)
 timmy.speed(40)
 
 
 
-draw_spirograph(2)
+# draw_spirograph(2)
 # print(timmy.heading())
 
-# while my_screen:
-#     random_walk(turtle=timmy, steps = 10, distance=50)
+while my_screen:
+    random_walk(turtle=timmy, steps = 10, distance=50)
 
 
 
