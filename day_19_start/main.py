@@ -4,6 +4,7 @@ from turtle import Turtle,Screen
 
 my_screen = Screen()
 my_screen.setup(width=1000, height=800)
+my_screen.title("Turtle Race")
 is_race_on = False
 user_bet = my_screen.textinput("Make your bet", "Which turtle will win the race? Enter a color: ")
 colors = ["red", "orange", "yellow", "green", "blue", "purple"]
@@ -22,7 +23,7 @@ if user_bet:
 
 while is_race_on:
     for turtle in all_turtles:
-        if turtle.xcor() > 450:
+        if turtle.xcor() > 480:
             is_race_on = False
             winning_color = turtle.pencolor()
             if user_bet == winning_color:
