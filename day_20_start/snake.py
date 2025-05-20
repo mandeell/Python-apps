@@ -1,4 +1,4 @@
-import turtle
+from turtle import Turtle
 
 STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]  # Module-level constant for initial snake positions
 MOVE_DISTANCE = 20
@@ -15,11 +15,16 @@ class Snake:
         self.create_snake()
         self.head = self.segments[0]  # Head is the first segment
 
+    def check_self_collision(self):
+        for segment in self.segments[1:]:
+            if self.head.distance(segment) < 10:
+                return True
+        return False
 
     def create_snake(self):
         """Creates the initial snake with segments at starting positions."""
         for index, position in enumerate(STARTING_POSITIONS):
-            new_segment = turtle.Turtle("square" if index > 0 else self.head_shape)
+            new_segment = Turtle("square" if index > 0 else self.head_shape)
             new_segment.color(self.color)
             new_segment.penup()
             new_segment.goto(position)
@@ -34,12 +39,20 @@ class Snake:
         self.head.forward(MOVE_DISTANCE)
 
     def extend(self):
-        new_segment = turtle.Turtle("square")
+        new_segment = Turtle("square")
         new_segment.color(self.color)
         new_segment.penup()
         last_segment = self.segments[-1]
         new_segment.goto(last_segment.xcor(), last_segment.ycor())
         self.segments.append(new_segment)
+
+    def reset(self):
+        """Clears the current snake and recreates it at starting positions."""
+        for segment in self.segments:
+            segment.hideturtle()  # Hide segments to remove from screen
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
 
     def up(self):
         """Turns the snake up if not already heading down."""
