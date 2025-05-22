@@ -1,0 +1,17 @@
+[Desktop Entry]
+Type=Application
+Name=Thonny
+GenericName=Python IDE
+Exec=/home/mandel/apps/thonny/bin/thonny %F
+Comment=Python IDE for beginners
+Icon=/home/mandel/apps/thonny/lib/python3.10/site-packages/thonny/res/thonny.png
+StartupWMClass=Thonny
+Terminal=false
+Categories=Development;IDE
+Keywords=programming;education
+MimeType=text/x-python;
+Actions=Edit;
+
+[Desktop Action Edit]
+Exec=/home/mandel/apps/thonny/bin/thonny %F
+Name=Edit with Thonny

@@ -27,7 +27,8 @@ import pandas
 # Create dataframe from scratch
 data_dict = {
     "students": ["Amy", "James", "Angela"],
-    "scores": [76, 56,65]
+    "scores": [76, 56,65],
+    "grade": ["A", "C", "B"]
 }
 data = pandas.DataFrame(data_dict)
-data.to_csv("new_data.csv")
+print(pandas.read_csv("new_data.csv"))
