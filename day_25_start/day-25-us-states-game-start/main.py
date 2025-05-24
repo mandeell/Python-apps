@@ -14,14 +14,10 @@ t.shape(image)
 states_data = pandas.read_csv("50_states.csv")
 all_states = states_data.state.to_list()
 guessed_states =[]
-print(all_states)
 
-# answer_state = screen.textinput(prompt="What's another state's name?",
-#                                 title="Guess the State").title()
-# Game loop
-while len(guessed_states) <50:
+while len(guessed_states) < len(all_states):
     answer_state = screen.textinput(
-        title=f"{len(guessed_states)}/50 States Correct",
+        title=f"{len(guessed_states)}/{len(all_states)} States Correct",
         prompt="What's another state's name?")
     # Exit game if user types 'exit'
     if answer_state is None or answer_state.title() == "Exit":
