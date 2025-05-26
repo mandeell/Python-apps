@@ -1,6 +1,9 @@
 from tkinter import *
 from tkinter import messagebox
-import secrets, string, random, re, os
+import secrets, string, random, re, json
+from ui import setup_ui
+
+WHITE="white"
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate_password():
@@ -30,9 +33,13 @@ def generate_password():
             required <= len(re.findall(pattern, password))
             for required, pattern in constraints
         ):
-            password_entry.delete(0, END)
-            password_entry.insert(0, password)
-            break
+            if len(website_entry.get()) != 0:
+                password_entry.delete(0, END)
+                password_entry.insert(0, password)
+                break
+            else:
+                messagebox.showerror(title="Error", message="Enter the name of the website")
+                break
             # return password
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
@@ -40,74 +47,75 @@ def save():
     password = password_entry.get()
     email_username = email_username_entry.get()
     website = website_entry.get()
+    new_data = {
+        website.title(): {
+            "email": email_username,
+            "password": password
+        }
+    }
 
     if  len(website) == 0 or len(email_username) == 0 or len(password) == 0:
         messagebox.showinfo(title="Oops", message="Please make sure you haven't left any fields empty!")
     else:
-        is_okay = messagebox.askokcancel(title=website, message=f"These are the details entered: "f"\nEmail: "
-                                                      f"{email_username}\nPassword: {password}"
-                                                      f"\nIs it okay to save?")
-        if is_okay:
-            file_exists = os.path.exists("data.txt")
-            with open("data.txt", "a") as file:
-                if not file_exists:
-                    file.write("Website | Email/Username | Password\n")
-                file.write(f"{website} | {email_username} | {password}\n")
+        try:
+            with open("data.json", "r") as file:
+                # Reading old data
+                data = json.load(file)
+        except FileNotFoundError:
+            with open("data.json", "w") as file:
+                json.dump(new_data, file, indent=4)
+        else:
+            # Updating old data with new data
+            data.update(new_data)
 
+            with open("data.json", "w") as file:
+                # Saving updated data
+                json.dump(data, file, indent=4)
+        finally:
             website_entry.delete(0, END)
             password_entry.delete(0, END)
 
+# ---------------------------- COPY TO CLIPBOARD ------------------------------- #
 def copy_to_clipboard():
     pwd = password_entry.get()
     if pwd:
         window.clipboard_clear()
         window.clipboard_append(pwd)
         messagebox.showinfo("Copied", "Password copied to clipboard!")
-    else:
-        messagebox.showwarning("Empty", "No password to copy!")
 
-# ---------------------------- UI SETUP ------------------------------- #
-window = Tk()
-window.title("Password Manager")
-window.config( padx=100, pady=100)
-window.resizable(width=False, height=False)
+# ---------------------------- FIND PASSWORD ------------------------------- #
+def find_password():
+    website = website_entry.get()
 
-
-canvas = Canvas(width=400, height=400,highlightthickness=0)
-logo_img = PhotoImage(file="logo_resized_2x.png")
-canvas.create_image(200, 200, image=logo_img)
-canvas.grid(row=0, column=1)
-
-website_label = Label(text="Website:")
-website_label.grid(row=1, column=0)
-
-website_entry = Entry(width=45,bg="#d9d9d9", highlightthickness=0)
-website_entry.focus()
-website_entry.grid(row=1, column=1, columnspan=2, pady=10)
-
-email_username_label = Label(text="Email/Username:")
-email_username_label.grid(row=2, column=0)
-
-email_username_entry = Entry(width=45, bg="#d9d9d9", highlightthickness=0)
-email_username_entry.insert(0, string="nelsonokiki@gmail.com")
-email_username_entry.grid(row=2, column=1,columnspan=2)
-
-password_label = Label(text="Password:")
-password_label.grid(row=3, column=0)
-
-password_entry = Entry(width=27, bg="#d9d9d9", highlightthickness=0)
-password_entry.grid(row=3, column=1,pady=10)
-
-generate_button = Button(text="Generate Password", highlightthickness=0, command=generate_password)
-generate_button.grid(row=3, column=2)
-
-add_button = Button(text="Add", highlightthickness=0, width=44, command=save)
-add_button.grid(row=4, column=1, columnspan=2, pady=10)
+    if not website.title():
+        messagebox.showwarning(
+            title="Empty Field",
+            message="Please enter a website to search!"
+        )
+    try:
+        with open("data.json", "r") as file:
+            data = json.load(file)
+        if website.title() in data:
+            email = data[website.title()]["email"]
+            password = data[website.title()]["password"]
+            messagebox.showinfo(
+                title=website.title(),
+                message=f"Email: {email}\nPassword: {password}"
+            )
+            search_button.config(
+                bg="#D34A3F",
+                fg=WHITE
+            )
+        else:
+            messagebox.showinfo(
+                title="Not Found",
+                message=f"No details for {website} found."
+            )
+    except FileNotFoundError:
+        messagebox.showerror("Error", "No data file found. Save some passwords first!")
 
 
-
-
-
-
-
-window.mainloop()
+if __name__ == "__main__":
+    window = Tk()
+    website_entry, email_username_entry, password_entry, search_button = setup_ui(window, generate_password, save, copy_to_clipboard, find_password)
+    window.mainloop()
