@@ -3,10 +3,10 @@ import requests
 response = requests.get("http://api.open-notify.org/iss-now.json")
 response.raise_for_status()
 data = response.json()
-longitute = data["iss_position"]["longitude"]
+longitude = data["iss_position"]["longitude"]
 latitude = data["iss_position"]["latitude"]
 
-iss_position = (float(longitute), float(latitude))
+iss_position = (float(longitude), float(latitude))
 
 parameters = {
     "lat": iss_position[1],
