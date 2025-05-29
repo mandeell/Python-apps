@@ -25,16 +25,14 @@ will_rain = False
 
 for my_id in range(0,4):
     weather_data = weather_response.json()["list"][my_id]["weather"][0]["id"]
-    print(weather_data)
     if weather_data < 700:
         will_rain = True
 if will_rain:
-    print(weather_data)
-    # client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-    # message = client.messages.create(
-    #     to=TO_PHONE_NUMBER,
-    #     from_=TWILIO_PHONE_NUMBER,
-    #     body="You don try go sleep bros"
-    # )
-    # print(message.status)
-    #
+    client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+    message = client.messages.create(
+        to=TO_PHONE_NUMBER,
+        from_=TWILIO_PHONE_NUMBER,
+        body="You don try go sleep bros"
+    )
+    print(message.status)
+
