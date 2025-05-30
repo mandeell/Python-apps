@@ -5,7 +5,9 @@ from dotenv import load_dotenv
 from typing import Optional  # Import Optional for type hinting
 
 # Load environment variables
-load_dotenv()
+ENV_FILE_PATH = "../../.env"
+load_dotenv(dotenv_path=ENV_FILE_PATH)
+
 MY_EMAIL = os.getenv("EMAIL")
 MY_PASSWORD = os.getenv("EMAIL_PASSWORD")
 TO_EMAIL = os.getenv("TO_EMAIL")
