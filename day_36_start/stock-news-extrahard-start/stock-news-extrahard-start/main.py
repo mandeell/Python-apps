@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from twilio.rest import Client
 from datetime import datetime, timedelta
 
-ENV_FILE_PATH = "../../../day_35_start/.env"
+ENV_FILE_PATH = "../../../.env"
 load_dotenv(dotenv_path=ENV_FILE_PATH)
 
 APH_API_KEY = os.getenv("APH_API_KEY1")
